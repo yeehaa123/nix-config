@@ -17,9 +17,7 @@
       nodePackages."@astrojs/language-server"
       rnix-lsp
       xclip
-      wl-clipboard
-    ];
-
+      wl-clipboard ];
     plugins = with pkgs.vimPlugins; [
       {
         plugin = nvim-lspconfig;
@@ -61,6 +59,10 @@
         config = toLuaFile ./nvim/plugin/telescope.lua;
       }
 
+      { 
+        plugin = project-nvim;
+        config = toLua "require(\"project_nvim\").setup()";
+      }
       telescope-fzf-native-nvim
       vim-nix
     ];
