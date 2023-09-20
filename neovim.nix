@@ -26,6 +26,9 @@
         config = toLuaFile ./nvim/plugin/lsp.lua;
       }
 
+      lualine-nvim
+      nvim-web-devicons
+
       neodev-nvim
 
       {
@@ -64,6 +67,7 @@
 
     extraLuaConfig = ''
       ${builtins.readFile ./nvim/options.lua}
+      ${builtins.readFile ./nvim/mappings.lua}
     '';
   };
 }
