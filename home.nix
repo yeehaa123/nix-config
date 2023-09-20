@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./nixvim.nix
+    ./neovim.nix
   ];
 
   home.username = "yeehaa";
