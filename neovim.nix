@@ -3,8 +3,7 @@
 {
   programs.neovim = 
    let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+    toLua = str: "lua << EOF\n${str}\nEOF\n"; toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
   in
   {
     enable = true;
@@ -53,6 +52,12 @@
         plugin = gruvbox-nvim;
         config = "colorscheme gruvbox";
       }
+
+      {
+        plugin = nvim-cmp;
+        config = toLuaFile ./nvim/plugin/cmp.lua;
+      }
+      cmp-nvim-lsp
 
       {
         plugin = telescope-nvim;

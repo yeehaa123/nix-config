@@ -5,6 +5,7 @@ local options = {
   tabstop = 2,
   autoindent = true,
   expandtab = true,
+  completeopt = {'menu', 'menuone', 'noselect'}
 }
 
 for option, value in pairs(options) do 
