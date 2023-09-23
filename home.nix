@@ -82,6 +82,8 @@
     hugo # static site generator
     glow # markdown previewer in terminal
 
+    thunderbird
+
     btop  # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
