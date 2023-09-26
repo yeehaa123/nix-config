@@ -123,7 +123,7 @@
         normal.family = "MesloLGSNerdFont";
         italic.family = "MesloLGSNerdFont";
         bold.family = "MesloLGSNerdFont";
-        size = 12;
+        size = 14;
         draw_bold_text_with_bright_colors = true;
       };
       scrolling.multiplier = 5;

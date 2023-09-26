@@ -4,8 +4,7 @@
 
 { config, pkgs,  ... }:
 
-{
-  imports =
+{ imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -44,18 +43,20 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
- # Enable the KDE Plasma Desktop Environment.
- services.xserver.displayManager.sddm.enable = true;
- services.xserver.desktopManager.plasma5.enable = true;
- #  services.xserver.displayManager.gdm.enable = true;
- #  services.xserver.desktopManager.gnome.enable = true;  
-
 
   # Configure keymap in X11
   services.xserver = {
+    enable = true;
+    displayManager = {
+      gdm.enable = true;
+      autoLogin = {
+        enable = false;
+        user = "yeehaa";
+      };
+    };
+    desktopManager = {
+      gnome.enable = true;
+    };
     layout = "us";
     xkbVariant = "";
     xkbOptions = "ctrl:nocaps";
@@ -99,10 +100,6 @@
     ];
   };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = false;
-  services.xserver.displayManager.autoLogin.user = "yeehaa";
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -114,6 +111,7 @@
     git
     vim
     nodejs_20
+    materia-kde-theme
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

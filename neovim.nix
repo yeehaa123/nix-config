@@ -64,6 +64,8 @@
         config = toLuaFile ./nvim/plugin/telescope.lua;
       }
 
+      telescope-file-browser-nvim
+
       { 
         plugin = project-nvim;
         config = toLua "require(\"project_nvim\").setup()";
