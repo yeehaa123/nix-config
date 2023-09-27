@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs,  ... }:
 
 {
   programs.neovim = 
@@ -16,16 +16,24 @@
       nodePackages."@astrojs/language-server"
       rnix-lsp
       xclip
-      wl-clipboard ];
+      wl-clipboard 
+    ];
+
+
     plugins = with pkgs.vimPlugins; [
+
       {
         plugin = nvim-lspconfig;
         config = toLuaFile ./nvim/plugin/lsp.lua;
       }
 
       lualine-nvim
+      plenary-nvim
       nvim-web-devicons
-
+      { 
+        plugin = nvim-obsidian;
+        config = toLuaFile ./nvim/plugin/obsidian.lua;
+      }
       neodev-nvim
 
       {

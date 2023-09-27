@@ -9,18 +9,30 @@
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    }; 
+
+    plugin-obsidian = { 
+      url = "github:epwalsh/obsidian.nvim";
+      flake = false;
     };
-    flake-utils.url = "github:numtide/flake-utils";
-    vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
   };
 
-  outputs = { self, nixpkgs, home-manager,flake-utils, vim-extra-plugins,  ... }: 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
   let 
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ vim-extra-plugins.overlays.default ];
     };
+
+
+    overlay-nvim = (final: prev: {
+      vimPlugins = prev.vimPlugins // {
+        nvim-obsidian = prev.vimUtils.buildVimPluginFrom2Nix {
+          name = "nvim-obsidian";
+          src = inputs.plugin-obsidian;
+        };
+      };
+    });
   in
   {
     nixosModules = {
@@ -51,21 +63,11 @@
         };
       };
     };
-    packages = {
-      neovimplus = pkgs.neovim.override {
-        configure = {
-          packages.example = with pkgs.vimExtraPlugins; {
-            start = [
-              vim-moonfly-colors
-            ];
-          };
-        };
-      };
-    };
     nixosConfigurations = {
       default = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; };
-        modules = with self.nixosModules; [
+        specialArgs = { inherit system; inherit inputs; };
+        modules = [
+          ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-nvim ]; })
           ./configuration.nix
           home-manager.nixosModules.home-manager 
           {
@@ -76,7 +78,8 @@
                 ./home.nix
               ];
             };
-          }];
+          }
+        ];
       };
     };
   };
