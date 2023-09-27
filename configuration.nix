@@ -111,7 +111,6 @@
     git
     vim
     nodejs_20
-    materia-kde-theme
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -123,7 +122,9 @@
   # };
 
   services.flatpak.enable = true;
-
+  powerManagement.resumeCommands = ''
+      ${pkgs.utillinux}/bin/rfkill unblock wlan
+    '';
 
   # List services that you want to enable:
 
