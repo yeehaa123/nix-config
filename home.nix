@@ -31,6 +31,7 @@
   programs.waybar = { 
     enable = true;
     settings = builtins.fromJSON (builtins.readFile ./hyprland/waybar/config.json);
+    style = builtins.readFile ./hyprland/waybar/style.css;
   };
 
   fonts.fontconfig.enable = true;

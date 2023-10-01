@@ -32,7 +32,7 @@
 
     overlay-nvim = (final: prev: {
       vimPlugins = prev.vimPlugins // {
-        nvim-obsidian = prev.vimUtils.buildVimPluginFrom2Nix {
+        nvim-obsidian = prev.vimUtils.buildVimPlugin {
           name = "nvim-obsidian";
           src = inputs.plugin-obsidian;
         };
