@@ -19,6 +19,11 @@ require("obsidian").setup({
     new_notes_location = "current_dir",
   },
 
+  backlinks = {
+    height = 10,
+    wrap = true,
+  },
+
   note_frontmatter_func = function(note)
     local out = { title = note.id }
     if note.metadata ~= nil and require("obsidian").util.table_length(note.metadata) > 0 then

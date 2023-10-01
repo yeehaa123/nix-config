@@ -3,21 +3,26 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/release-23.05";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     }; 
+
+    hyprland = { 
+      url = "github:hyprwm/Hyprland";
+    };
 
     plugin-obsidian = { 
       url = "github:epwalsh/obsidian.nvim";
       flake = false;
     };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: 
   let 
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -35,34 +40,6 @@
     });
   in
   {
-    nixosModules = {
-      gnome = { pkgs, ... }: {
-        config = {
-          environment.gnome.excludePackages = (with pkgs; [
-            gnome-photos
-            gnome-tour
-          ]) ++ (with pkgs.gnome; [
-            cheese # webcam tool
-            gnome-music
-            gedit # text editor
-            epiphany # web browser
-            geary # email reader
-            gnome-characters
-            tali # poker game
-            iagno # go game
-            hitori # sudoku game
-            atomix # puzzle game
-            yelp # Help view
-            gnome-contacts
-            gnome-initial-setup
-          ]);
-          programs.dconf.enable = true;
-          environment.systemPackages = with pkgs; [
-            gnome.gnome-tweaks
-          ];
-        };
-      };
-    };
     nixosConfigurations = {
       default = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; inherit inputs; };
