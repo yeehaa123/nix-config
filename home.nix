@@ -28,6 +28,12 @@
     secureSocket = false;
   };
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = builtins.readFile ./hyprland/hyprland.conf;
+  };
+
+
   programs.waybar = { 
     enable = true;
     settings = builtins.fromJSON (builtins.readFile ./hyprland/waybar/config.json);

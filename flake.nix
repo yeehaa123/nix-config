@@ -59,5 +59,11 @@
         ];
       };
     };
+    homeConfigurations."yeehaa@nixos" = home-manager.lib.homeManagerConfiguration {
+      modules = [
+        hyprland.homeManagerModules.default
+        {wayland.windowManager.hyprland.enable = true;}
+      ];
+    };
   };
 }
