@@ -63,6 +63,7 @@
     tree
     nix-output-monitor
     kitty
+    brave
     google-chrome
     obsidian
   ];
