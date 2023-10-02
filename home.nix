@@ -13,6 +13,13 @@
     "Xft.dpi" = 172;
   };
 
+  xdg.configFile."hypr/hyprpaper.conf".text = ''
+    preload=${./hyprland/wallpaper.jpg}
+
+    #set the default wallpaper(s) seen on inital workspace(s) --depending on the number of monitors used
+    wallpaper=,${./hyprland/wallpaper.jpg}
+  '';
+
   programs.git = {
     enable = true;
     userName = "Jan Hein Hoogstad";
@@ -33,7 +40,6 @@
     extraConfig = builtins.readFile ./hyprland/hyprland.conf;
   };
 
-
   programs.waybar = { 
     enable = true;
     settings = builtins.fromJSON (builtins.readFile ./hyprland/waybar/config.json);
@@ -47,6 +53,7 @@
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro"  "Iosevka" "Meslo"]; })
     pandoc
     zip
+    hyprpaper
     wlogout
     ripgrep
     unzip
