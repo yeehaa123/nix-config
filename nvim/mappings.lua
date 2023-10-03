@@ -8,3 +8,7 @@ vim.keymap.set('n', '<leader>bf', file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>p', projects.projects, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>os', "<cmd>ObsidianSearch<CR>", {})
+vim.keymap.set('n', '<leader>obl', "<cmd>ObsidianBacklinks<CR>", {})
+vim.keymap.set('n', '<leader>z', "<cmd>Goyo<CR>", {})
+

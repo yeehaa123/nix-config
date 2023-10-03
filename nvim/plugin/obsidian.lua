@@ -24,8 +24,16 @@ require("obsidian").setup({
     wrap = true,
   },
 
+  follow_url_func = function(url)
+    vim.fn.jobstart({"xdg-open", url})
+  end,
+
+  note_id_func = function(title)
+    return title
+  end,
+
   note_frontmatter_func = function(note)
-    local out = { title = note.id }
+    local out = { title = note.id, aliases = note.aliases, tags = note.tags }
     if note.metadata ~= nil and require("obsidian").util.table_length(note.metadata) > 0 then
       for k, v in pairs(note.metadata) do
         out[k] = v

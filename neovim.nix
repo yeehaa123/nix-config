@@ -36,6 +36,11 @@
         config = toLuaFile ./nvim/plugin/obsidian.lua;
       }
       neodev-nvim
+      limelight-vim
+      {
+        plugin = goyo-vim;
+        config = toLuaFile ./nvim/plugin/goyo.lua;
+      }
 
       {
         plugin = (nvim-treesitter.withPlugins (p: [
@@ -44,6 +49,7 @@
           p.tree-sitter-astro
           p.tree-sitter-typescript
           p.tree-sitter-vim
+          p.tree-sitter-markdown
           p.tree-sitter-bash
           p.tree-sitter-lua
           p.tree-sitter-python
