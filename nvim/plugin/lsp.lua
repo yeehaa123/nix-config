@@ -1,3 +1,9 @@
+require('neodev').setup()
+local lspconfig = require('lspconfig')
+local util = require('lspconfig/util')
+
+
+
 local on_attach = function(_, bufnr)
   local bufmap = function(keys, func)
     vim.keymap.set('n', keys, func, { buffer = bufnr })
@@ -17,16 +23,20 @@ local on_attach = function(_, bufnr)
 
   bufmap('K', vim.lsp.buf.hover)
 
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, {})
+  local format_sync_grp = vim.api.nvim_create_augroup("Format", {})
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.*",
+    callback = function()
+      vim.cmd("Autoformat")
+    end,
+    group = format_sync_grp,
+  })
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-require('neodev').setup()
 
-require'lspconfig'.astro.setup{
+lspconfig.astro.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 	root_dir = function()
@@ -35,8 +45,7 @@ require'lspconfig'.astro.setup{
 	cmd = { "astro-ls", "--stdio" }
 }
 
-
-require('lspconfig').lua_ls.setup {
+lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 	root_dir = function()
@@ -51,7 +60,21 @@ require('lspconfig').lua_ls.setup {
   }
 }
 
-require('lspconfig').rnix.setup {
+lspconfig.rust_analyzer.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "rust" },
+  root_dir = util.root_pattern("Cargo.toml"),
+  settings = {
+    ['rust-analyzer'] = {
+      cargo = {
+        allFeatures = true,
+      }
+    }
+  }
+}
+
+lspconfig.rnix.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }

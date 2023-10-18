@@ -1,16 +1,24 @@
 { config, pkgs,  ... }:
 
 { imports =
-    [ 
-      ./hardware-configuration.nix
-    ];
+  [
+    ./hardware-configuration.nix
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    extraModprobeConfig = ''
+    options snd-hda-intel model=auto
+    '';
+    blacklistedKernelModules = [ "snd_pcsp" ];
   };
+
 
   networking = {
     hostName = "nixos"; # Define your hostname.
@@ -53,8 +61,13 @@
       wget
       vim
       git
+      pavucontrol
       networkmanagerapplet
-      nodejs_20
+      nodejs_18
+      rustc
+      cargo
+      rust-analyzer
+      rustPackages.clippy
     ];
   };
 
@@ -79,16 +92,16 @@
     printing.enable = true;
     blueman.enable = true;
     gnome.gnome-keyring.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
   };
 
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+      package = pkgs.pulseaudioFull;
+    };
+  };
 
   security = {
     rtkit.enable = true;
@@ -100,7 +113,7 @@
   users.users.yeehaa = {
     isNormalUser = true;
     description = "Jan Hein Hoogstad";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
 
 
@@ -109,10 +122,10 @@
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-    })];
-  };
-}
+      (self: super: {
+        waybar = super.waybar.overrideAttrs (oldAttrs: {
+          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+        });
+      })];
+    };
+  }

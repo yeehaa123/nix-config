@@ -6,9 +6,9 @@
     viAlias = true;
     vimAlias = true;
     options = {
-      number = true;         
+      number = true;
       relativenumber = true;
-      shiftwidth = 2;       
+      shiftwidth = 2;
       tabstop = 2;
       autoindent = true;
       expandtab = true;
@@ -27,7 +27,7 @@
         action = "<esc>";
       };
     };
-    globals.mapleader = " "; 
+    globals.mapleader = " ";
     colorschemes.onedark.enable = true;
     plugins = {
       lightline.enable = true;
@@ -48,7 +48,7 @@
       };
       nvim-tree = {
         enable = true;
-       };
+      };
       telescope = {
         enable = true;
         extensions = {
@@ -66,9 +66,9 @@
         };
       };
     };
-    extraPlugins = with pkgs.vimPlugins; [ 
-      vim-nix 
+    extraPlugins = with pkgs.vimPlugins; [
+      vim-nix
       zen-mode-nvim
-    ]; 
+    ];
   };
 }

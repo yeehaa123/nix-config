@@ -1,6 +1,5 @@
 {
   description = "Yeehaa's NixOS Flake";
-
   inputs = {
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -9,21 +8,21 @@
     home-manager = {
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+    };
 
-    hyprland = { 
+    hyprland = {
       url = "github:hyprwm/Hyprland";
     };
 
-    plugin-obsidian = { 
+    plugin-obsidian = {
       url = "github:epwalsh/obsidian.nvim";
       flake = false;
     };
 
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: 
-  let 
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
+  let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -46,7 +45,7 @@
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-nvim ]; })
           ./configuration.nix
-          home-manager.nixosModules.home-manager 
+          home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
