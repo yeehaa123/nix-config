@@ -39,19 +39,19 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 lspconfig.astro.setup{
   on_attach = on_attach,
   capabilities = capabilities,
-	root_dir = function()
+  root_dir = function()
     return vim.loop.cwd()
   end,
-	cmd = { "astro-ls", "--stdio" }
+  cmd = { "astro-ls", "--stdio" }
 }
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-	root_dir = function()
+  root_dir = function()
     return vim.loop.cwd()
   end,
-	cmd = { "lua-lsp" },
+  cmd = { "lua-lsp" },
   settings = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -74,7 +74,15 @@ lspconfig.rust_analyzer.setup {
   }
 }
 
+lspconfig.ocamllsp.setup({
+  cmd = { "ocamllsp" },
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  root_dir = util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+
 lspconfig.rnix.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+  on_attach = on_attach,
+  capabilities = capabilities,
 }

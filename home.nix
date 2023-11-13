@@ -13,8 +13,7 @@
   ];
 
   xresources.properties = {
-    "Xcursor.size" = 16;
-    "Xft.dpi" = 172;
+    "Xcursor.size" = 24;
   };
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''

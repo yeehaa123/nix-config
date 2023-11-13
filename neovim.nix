@@ -49,6 +49,7 @@
             p.tree-sitter-css
             p.tree-sitter-astro
             p.tree-sitter-typescript
+            p.tree-sitter-ocaml
             p.tree-sitter-vim
             p.tree-sitter-markdown
             p.tree-sitter-bash

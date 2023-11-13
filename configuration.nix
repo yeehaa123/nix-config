@@ -7,47 +7,46 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-    extraModprobeConfig = ''
-    options snd-hda-intel model=auto
-    '';
-    blacklistedKernelModules = [ "snd_pcsp" ];
+  boot = { kernelPackages = pkgs.linuxPackages_latest;
+  loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
+  extraModprobeConfig = ''
+  options snd-hda-intel model=auto
+  '';
+  blacklistedKernelModules = [ "snd_pcsp" ];
+};
 
 
-  networking = {
-    hostName = "nixos"; # Define your hostname.
-    networkmanager.enable = true;
+networking = {
+  hostName = "nixos"; # Define your hostname.
+  networkmanager.enable = true;
+};
+
+time.timeZone = "Europe/Amsterdam";
+
+i18n = {
+  defaultLocale = "en_US.UTF-8";
+  extraLocaleSettings = {
+    LC_ADDRESS = "nl_NL.UTF-8";
+    LC_IDENTIFICATION = "nl_NL.UTF-8";
+    LC_MEASUREMENT = "nl_NL.UTF-8";
+    LC_MONETARY = "nl_NL.UTF-8";
+    LC_NAME = "nl_NL.UTF-8";
+    LC_NUMERIC = "nl_NL.UTF-8";
+    LC_PAPER = "nl_NL.UTF-8";
+    LC_TELEPHONE = "nl_NL.UTF-8";
+    LC_TIME = "nl_NL.UTF-8";
   };
+};
 
-  time.timeZone = "Europe/Amsterdam";
-
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "nl_NL.UTF-8";
-      LC_IDENTIFICATION = "nl_NL.UTF-8";
-      LC_MEASUREMENT = "nl_NL.UTF-8";
-      LC_MONETARY = "nl_NL.UTF-8";
-      LC_NAME = "nl_NL.UTF-8";
-      LC_NUMERIC = "nl_NL.UTF-8";
-      LC_PAPER = "nl_NL.UTF-8";
-      LC_TELEPHONE = "nl_NL.UTF-8";
-      LC_TIME = "nl_NL.UTF-8";
-    };
-  };
-
-  programs.hyprland = {
+programs.hyprland = {
+  enable = true;
+  xwayland = {
     enable = true;
-    xwayland = {
-      enable = true;
-    };
   };
+};
 
 
   # Configure keymap in X11
@@ -63,7 +62,15 @@
       git
       pavucontrol
       networkmanagerapplet
-      nodejs_18
+      nodejs_20
+      ocaml
+      opam
+      dune_2
+      pkg-config
+      gnumake
+      gcc
+      bintools-unwrapped
+      gmp
       rustc
       cargo
       rust-analyzer
@@ -72,6 +79,12 @@
   };
 
   services = {
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
     xserver = {
       enable = true;
       displayManager = {
@@ -94,12 +107,10 @@
     gnome.gnome-keyring.enable = true;
   };
 
-  sound.enable = true;
   hardware = {
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      package = pkgs.pulseaudioFull;
+    bluetooth = {
+      enable = true; # enables support for Bluetooth
+      powerOnBoot = true; #
     };
   };
 
