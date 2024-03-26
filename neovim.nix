@@ -28,10 +28,10 @@
           config = toLuaFile ./nvim/plugin/lsp.lua;
         }
         vim-autoformat
-
         lualine-nvim
         plenary-nvim
         nvim-web-devicons
+        gen-nvim
         {
           plugin = nvim-obsidian;
           config = toLuaFile ./nvim/plugin/obsidian.lua;

@@ -69,6 +69,7 @@
       kitty
       brave
       google-chrome
+      android-file-transfer
       obsidian
     ];
 
@@ -111,6 +112,6 @@
       };
     };
 
-    home.stateVersion = "23.05";
+    home.stateVersion = "23.11";
     programs.home-manager.enable = true;
   }

@@ -18,6 +18,10 @@
       url = "github:epwalsh/obsidian.nvim";
       flake = false;
     };
+    plugin-gen = {
+      url = "github:David-Kunz/gen.nvim";
+      flake = false;
+    };
 
   };
 
@@ -34,6 +38,10 @@
         nvim-obsidian = prev.vimUtils.buildVimPlugin {
           name = "nvim-obsidian";
           src = inputs.plugin-obsidian;
+        };
+        gen-nvim = prev.vimUtils.buildVimPlugin {
+          name = "gen-nvim";
+          src = inputs.plugin-gen;
         };
       };
     });

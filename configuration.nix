@@ -63,6 +63,9 @@ programs.hyprland = {
       pavucontrol
       networkmanagerapplet
       nodejs_20
+      nodePackages.node-gyp
+      nodePackages.typescript-language-server
+      nodePackages.pnpm
       ocaml
       opam
       dune_2
@@ -70,15 +73,20 @@ programs.hyprland = {
       gnumake
       gcc
       bintools-unwrapped
+      hugo
       gmp
       rustc
+      expressvpn
       cargo
       rust-analyzer
       rustPackages.clippy
     ];
   };
+  virtualisation.docker.enable = true;
+
 
   services = {
+    expressvpn.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -124,11 +132,11 @@ programs.hyprland = {
   users.users.yeehaa = {
     isNormalUser = true;
     description = "Jan Hein Hoogstad";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker"];
   };
 
 
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   nixpkgs = {
     config.allowUnfree = true;
