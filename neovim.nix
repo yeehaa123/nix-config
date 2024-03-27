@@ -15,7 +15,6 @@
       extraPackages = with pkgs; [
         luajitPackages.lua-lsp
         nodePackages."@astrojs/language-server"
-        rnix-lsp
         xclip
         wl-clipboard
       ];
@@ -27,7 +26,10 @@
           plugin = nvim-lspconfig;
           config = toLuaFile ./nvim/plugin/lsp.lua;
         }
-        vim-autoformat
+        {
+          plugin = none-ls-nvim;
+          config = toLuaFile ./nvim/plugin/none-ls.lua;
+        }
         lualine-nvim
         plenary-nvim
         nvim-web-devicons

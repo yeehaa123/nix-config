@@ -78,6 +78,9 @@ programs.hyprland = {
       rustc
       expressvpn
       cargo
+      prettierd
+      stylua
+      stylelint
       rust-analyzer
       rustPackages.clippy
     ];
@@ -105,9 +108,9 @@ programs.hyprland = {
           user = "yeehaa";
         };
       };
-      layout = "us";
-      xkbVariant = "";
-      xkbOptions = "ctrl:nocaps";
+      xkb.layout = "us";
+      xkb.variant = "";
+      xkb.options = "ctrl:nocaps";
     };
 
     printing.enable = true;
