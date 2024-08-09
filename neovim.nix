@@ -48,6 +48,7 @@
         {
           plugin = (nvim-treesitter.withPlugins (p: [
             p.tree-sitter-nix
+            p.tree-sitter-svelte
             p.tree-sitter-css
             p.tree-sitter-astro
             p.tree-sitter-typescript

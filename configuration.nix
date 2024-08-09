@@ -65,11 +65,14 @@ programs.hyprland = {
       nodejs_20
       nodePackages.node-gyp
       nodePackages.typescript-language-server
+      nodePackages.svelte-language-server
       nodePackages.pnpm
       ocaml
       opam
       dune_2
       pkg-config
+      turso-cli
+      sqld
       gnumake
       gcc
       bintools-unwrapped
@@ -82,6 +85,7 @@ programs.hyprland = {
       stylua
       stylelint
       rust-analyzer
+      tree-sitter
       rustPackages.clippy
     ];
   };

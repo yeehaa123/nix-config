@@ -42,6 +42,14 @@ lspconfig.astro.setup({
   cmd = { "astro-ls", "--stdio" },
 })
 
+lspconfig.svelte.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "svelte" },
+  root_dir = util.root_pattern("package.json", ".git"),
+  cmd = { "svelteserver", "--stdio" },
+})
+
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
