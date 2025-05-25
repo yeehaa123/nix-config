@@ -49,29 +49,62 @@
 
     fonts.fontconfig.enable = true;
 
-    home.packages = with pkgs; [
-      pkgs.fontconfig
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro"  "Iosevka" "Meslo"]; })
-      pandoc
-      gcc
-      gh
-      zip
-      hyprpaper
-      brightnessctl
-      wlogout
-      ripgrep
-      unzip
-      jq
-      fzf
-      which
-      tree
-      nix-output-monitor
-      kitty
-      brave
-      google-chrome
-      android-file-transfer
-      obsidian
-    ];
+  home.packages = with pkgs; [
+    # Development tools
+    direnv
+    nodejs_20
+    nodePackages.node-gyp
+    nodePackages.typescript-language-server
+    nodePackages.svelte-language-server
+    nodePackages.pnpm
+    ocaml
+    opam
+    dune_2
+    pkg-config
+    turso-cli
+    sqld
+    gnumake
+    gcc
+    bintools-unwrapped
+    hugo
+    gmp
+    rustc
+    cargo
+    prettierd
+    stylua
+    stylelint
+    rust-analyzer
+    tree-sitter
+    rustPackages.clippy
+    
+    # User applications
+    pkgs.fontconfig
+    pandoc
+    gh
+    zip
+    hyprpaper
+    brightnessctl
+    wlogout
+    ripgrep
+    unzip
+    jq
+    fzf
+    which
+    tree
+    nix-output-monitor
+    nil
+    bun
+    kitty
+    openssl
+    xclip
+    brave
+    thunderbird
+    google-chrome
+    android-file-transfer
+    obsidian
+    expressvpn
+    stdenv.cc.cc.lib
+  ];
 
     programs.starship = {
       enable = true;
@@ -108,9 +141,13 @@
       '';
 
       shellAliases = {
-        us = "source ~/configFiles/update.sh";
+        rebuild = "~/configFiles/rebuild.sh";
+        update = "nix flake update ~/configFiles";
       };
     };
+    
+    programs.direnv.enable = true;
+    programs.direnv.enableBashIntegration = true;
 
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;

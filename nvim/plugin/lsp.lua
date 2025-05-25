@@ -1,6 +1,7 @@
 require("neodev").setup()
 local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 local on_attach = function(_, bufnr)
   local bufmap = function(keys, func)
@@ -31,7 +32,7 @@ local on_attach = function(_, bufnr)
   -- })
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lspconfig.astro.setup({
   on_attach = on_attach,
@@ -65,7 +66,7 @@ lspconfig.lua_ls.setup({
   },
 })
 
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" },
@@ -93,7 +94,14 @@ lspconfig.ocamllsp.setup({
   capabilities = capabilities,
 })
 
-lspconfig.rnix.setup({
+lspconfig.nil_ls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
+  settings = {
+    ["nil"] = {
+      formatting = {
+        command = { "nixpkgs-fmt" },
+      },
+    },
+  },
 })

@@ -56,37 +56,13 @@ programs.hyprland = {
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
-      gnome.gnome-keyring
-      wget
+      # Core system tools only
+      gnome-keyring
       vim
       git
-      pavucontrol
+      wget
       networkmanagerapplet
-      nodejs_20
-      nodePackages.node-gyp
-      nodePackages.typescript-language-server
-      nodePackages.svelte-language-server
-      nodePackages.pnpm
-      ocaml
-      opam
-      dune_2
-      pkg-config
-      turso-cli
-      sqld
-      gnumake
-      gcc
-      bintools-unwrapped
-      hugo
-      gmp
-      rustc
-      expressvpn
-      cargo
-      prettierd
-      stylua
-      stylelint
-      rust-analyzer
-      tree-sitter
-      rustPackages.clippy
+      pavucontrol
     ];
   };
   virtualisation.docker.enable = true;
@@ -102,19 +78,16 @@ programs.hyprland = {
     };
     xserver = {
       enable = true;
-      displayManager = {
-        sddm = {
-          enable = true;
-          autoNumlock = true;
-        };
-        autoLogin = {
-          enable = false;
-          user = "yeehaa";
-        };
-      };
       xkb.layout = "us";
       xkb.variant = "";
       xkb.options = "ctrl:nocaps";
+    };
+
+    displayManager = {
+      sddm.enable = true;
+      sddm.autoNumlock = true;
+      autoLogin.enable = false;
+      autoLogin.user = "yeehaa";
     };
 
     printing.enable = true;
@@ -143,15 +116,7 @@ programs.hyprland = {
   };
 
 
-  system.stateVersion = "23.11"; # Did you read the comment?
+  # nixpkgs configuration is handled in flake.nix
 
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = [
-      (self: super: {
-        waybar = super.waybar.overrideAttrs (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-        });
-      })];
-    };
-  }
+  system.stateVersion = "23.11"; # Did you read the comment?
+}
