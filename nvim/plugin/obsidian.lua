@@ -12,17 +12,15 @@ require("obsidian").setup({
 
 	},
 
+	-- New notes location moved to top level
+	new_notes_location = "current_dir",
+
 	-- Optional, completion.
 	completion = {
 		nvim_cmp = true,
 		min_chars = 2,
-		new_notes_location = "current_dir",
 	},
 
-	backlinks = {
-		height = 10,
-		wrap = true,
-	},
 	follow_url_func = function(url)
 		vim.fn.jobstart({"xdg-open", url})
 	end,

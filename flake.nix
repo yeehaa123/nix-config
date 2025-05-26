@@ -2,11 +2,11 @@
   description = "Yeehaa's NixOS Flake";
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-24.11";
+      url = "github:nixos/nixpkgs/nixos-25.05";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";  # Match your nixpkgs version
+      url = "github:nix-community/home-manager/release-25.05";  # Match your nixpkgs version
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,10 +18,6 @@
       url = "github:hyprwm/Hyprland";
     };
 
-    plugin-obsidian = {
-      url = "github:epwalsh/obsidian.nvim";
-      flake = false;
-    };
     plugin-gen = {
       url = "github:David-Kunz/gen.nvim";
       flake = false;
@@ -35,10 +31,6 @@
       # Define overlays first
       overlay-nvim = (final: prev: {
         vimPlugins = prev.vimPlugins // {
-          nvim-obsidian = prev.vimUtils.buildVimPlugin {
-            name = "nvim-obsidian";
-            src = inputs.plugin-obsidian;
-          };
           gen-nvim = prev.vimUtils.buildVimPlugin {
             name = "gen-nvim";
             src = inputs.plugin-gen;
@@ -75,13 +67,14 @@
     in
     {
       nixosConfigurations = {
-        default = nixpkgs.lib.nixosSystem {
+        nixos = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs pkgs; };
+          specialArgs = { inherit inputs; };
           modules = [
             ./configuration.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.pkgs = pkgs;
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;

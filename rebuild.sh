@@ -8,6 +8,6 @@ set -e
 echo "Rebuilding NixOS configuration..."
 
 # Build and switch to the new configuration
-sudo nixos-rebuild switch --flake .#default
+sudo nixos-rebuild switch --flake .#nixos
 
 echo "Rebuild complete!"

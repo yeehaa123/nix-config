@@ -65,7 +65,6 @@
     sqld
     gnumake
     gcc
-    bintools-unwrapped
     hugo
     gmp
     rustc

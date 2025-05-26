@@ -35,7 +35,7 @@
         nvim-web-devicons
         gen-nvim
         {
-          plugin = nvim-obsidian;
+          plugin = obsidian-nvim;
           config = toLuaFile ./nvim/plugin/obsidian.lua;
         }
         neodev-nvim
@@ -93,7 +93,13 @@
 
         {
           plugin = project-nvim;
-          config = toLua "require(\"project_nvim\").setup()";
+          config = toLua ''
+            require("project_nvim").setup({
+              -- Disable LSP detection to avoid the deprecated function call
+              detection_methods = { "pattern" },
+              patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+            })
+          '';
         }
         vim-nix
       ];
