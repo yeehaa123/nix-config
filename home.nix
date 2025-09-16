@@ -3,6 +3,10 @@
 {
   imports = [
     ./neovim.nix
+    ./hyprland.nix
+    ./waybar.nix
+    ./tofi.nix
+    ./fnott.nix
   ];
 
   home.username = "yeehaa";
@@ -16,36 +20,20 @@
     "Xcursor.size" = 24;
   };
 
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-  preload=${./hyprland/wallpaper.jpg}
+  programs.git = {
+    enable = true;
+    userName = "Jan Hein Hoogstad";
+    userEmail = "yeehaa@offcourse.io";
+  };
 
-    #set the default wallpaper(s) seen on inital workspace(s) --depending on the number of monitors used
-    wallpaper=,${./hyprland/wallpaper.jpg}
-    '';
-
-    programs.git = {
-      enable = true;
-      userName = "Jan Hein Hoogstad";
-      userEmail = "yeehaa@offcourse.io";
-    };
-
-    programs.tmux = {
-      enable = true;
-      shortcut = "a";
-      baseIndex = 1;
-      newSession = true;
-      escapeTime = 0;
-      secureSocket = false;
-    }; wayland.windowManager.hyprland = {
-      enable = true;
-      extraConfig = builtins.readFile ./hyprland/hyprland.conf;
-    };
-
-    programs.waybar = {
-      enable = true;
-      settings = builtins.fromJSON (builtins.readFile ./hyprland/waybar/config.json);
-      style = builtins.readFile ./hyprland/waybar/style.css;
-    };
+  programs.tmux = {
+    enable = true;
+    shortcut = "a";
+    baseIndex = 1;
+    newSession = true;
+    escapeTime = 0;
+    secureSocket = false;
+  };
 
     fonts.fontconfig.enable = true;
 
@@ -72,18 +60,48 @@
     prettierd
     stylua
     stylelint
+    terraform
     rust-analyzer
     tree-sitter
     rustPackages.clippy
-    
+    patchelf
+
+    # Wayland tools
+    tofi
+    swaylock
+    grim
+    slurp
+    wl-clipboard
+    cliphist      # Clipboard history manager
+    hyprpaper
+    brightnessctl
+    wlogout
+    kdePackages.polkit-kde-agent-1
+    pulsemixer
+    fnott
+    libnotify  # For notify-send command
+
+    # TUI applications
+    lf            # Fast file manager
+    htop          # Process viewer
+    btop          # Beautiful resource monitor
+    ncdu          # Disk usage analyzer
+    bandwhich     # Network utilization
+    bluetuith     # Bluetooth TUI
+    cmus          # Music player
+    gopass        # Password manager
+    gopass-jsonapi
+    lazygit       # Git TUI
+    lazydocker    # Docker TUI
+
+    # Fonts
+    nerd-fonts.meslo-lg
+
     # User applications
     pkgs.fontconfig
     pandoc
     gh
     zip
-    hyprpaper
-    brightnessctl
-    wlogout
     ripgrep
     unzip
     jq

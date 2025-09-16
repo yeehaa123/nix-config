@@ -22,6 +22,8 @@
 networking = {
   hostName = "nixos"; # Define your hostname.
   networkmanager.enable = true;
+  nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  networkmanager.dns = "none";
 };
 
 time.timeZone = "Europe/Amsterdam";
@@ -41,20 +43,29 @@ i18n = {
   };
 };
 
-programs.hyprland = {
-  enable = true;
-  xwayland = {
+  # Enable Hyprland at system level for display manager
+  programs.hyprland = {
     enable = true;
+    xwayland.enable = true;
   };
-};
 
+  # XDG portal configuration for Wayland
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+    };
+  };
 
   # Configure keymap in X11
   environment = {
-    sessionVariables = {
-      WLR_NO_HARDWARE_CURSORS = "1";
-      NIXOS_OZONE_WL = "1";
-    };
     systemPackages = with pkgs; [
       # Core system tools only
       gnome-keyring
@@ -65,7 +76,12 @@ programs.hyprland = {
       pavucontrol
     ];
   };
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      dns = ["8.8.8.8" "8.8.4.4"];
+    };
+  };
 
 
   services = {
