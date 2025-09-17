@@ -23,13 +23,13 @@
     font = monospace
     font-size = 12
 
-    # Colors - subtle terminal theme
-    background-color = #1e1e2e
-    text-color = #cdd6f4
-    selection-color = #1e1e2e
-    selection-background = #585b70
-    prompt-color = #89b4fa
-    border-color = #585b70
+    # Colors - Gruvbox Dark Hard
+    background-color = #000000
+    text-color = #ebdbb2
+    selection-color = #000000
+    selection-background = #fabd2f
+    prompt-color = #b8bb26
+    border-color = #3c3836
 
     # Prompt
     prompt-text = "> "
@@ -64,11 +64,11 @@
     font = JetBrainsMono Nerd Font
     font-size = 32
 
-    # Colors (matching your Hyprland theme)
-    background-color = #1e1e2ecc
-    text-color = #cdd6f4
-    selection-color = #33ccff
-    prompt-color = #00ff99
+    # Colors - Gruvbox Dark Hard (fullscreen)
+    background-color = #000000dd
+    text-color = #ebdbb2
+    selection-color = #fabd2f
+    prompt-color = #b8bb26
 
     # Behavior
     hide-cursor = true

@@ -7,6 +7,8 @@
     ./waybar.nix
     ./tofi.nix
     ./fnott.nix
+    ./atuin.nix
+    ./kitty.nix
   ];
 
   home.username = "yeehaa";
@@ -94,6 +96,18 @@
     lazygit       # Git TUI
     lazydocker    # Docker TUI
 
+    # Shell enhancements
+    zoxide        # Smart directory jumping (z command)
+    eza           # Modern ls replacement with icons
+    bat           # Cat with syntax highlighting
+    fd            # Fast find replacement
+    duf           # Better df for disk usage
+    atuin         # Better shell history
+    tealdeer      # Simplified man pages (tldr)
+    bottom        # Another resource monitor
+    du-dust       # Better du
+    procs         # Modern ps replacement
+
     # Fonts
     nerd-fonts.meslo-lg
 
@@ -146,6 +160,34 @@
         };
         scrolling.multiplier = 5;
         selection.save_to_clipboard = true;
+
+        # Gruvbox Dark Hard colors
+        colors = {
+          primary = {
+            background = "#000000";  # Pure black
+            foreground = "#ebdbb2";  # Warm cream
+          };
+          normal = {
+            black = "#000000";
+            red = "#cc241d";
+            green = "#98971a";
+            yellow = "#d79921";
+            blue = "#458588";
+            magenta = "#b16286";
+            cyan = "#689d6a";
+            white = "#a89984";
+          };
+          bright = {
+            black = "#928374";
+            red = "#fb4934";
+            green = "#b8bb26";
+            yellow = "#fabd2f";
+            blue = "#83a598";
+            magenta = "#d3869b";
+            cyan = "#8ec07c";
+            white = "#ebdbb2";
+          };
+        };
       };
     };
 
@@ -154,17 +196,61 @@
       enableCompletion = true;
 
       bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+        export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+
+        # Initialize zoxide for smart cd
+        eval "$(zoxide init bash)"
+
+        # Better fzf defaults
+        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+        export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --prompt="❯ "'
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+        export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+        # Preview files with bat when using fzf
+        export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
       '';
 
       shellAliases = {
+        # Nix aliases
         rebuild = "~/configFiles/rebuild.sh";
         update = "nix flake update ~/configFiles";
+
+        # Modern replacements
+        ls = "eza --icons --group-directories-first";
+        ll = "eza --icons --group-directories-first -la";
+        lt = "eza --icons --group-directories-first --tree";
+        cat = "bat --style=plain";
+        find = "fd";
+        ps = "procs";
+        du = "dust";
+        df = "duf";
+        top = "btop";
+
+        # Quick shortcuts
+        c = "clear";
+        e = "exit";
+        g = "lazygit";
+        f = "lf";
+
+        # Git shortcuts
+        gs = "git status";
+        ga = "git add";
+        gc = "git commit";
+        gp = "git push";
+        gl = "git log --oneline --graph";
+
+        # Clipboard
+        clip = "wl-copy";
+        paste = "wl-paste";
       };
     };
     
-    programs.direnv.enable = true;
-    programs.direnv.enableBashIntegration = true;
+    programs.direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;  # Better Nix integration
+    };
 
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;

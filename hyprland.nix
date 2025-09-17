@@ -40,9 +40,9 @@
       general = {
         gaps_in = 15;
         gaps_out = 15;
-        border_size = 1;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        border_size = 2;
+        "col.active_border" = "rgba(fabd2fee) rgba(fb4934ee) 45deg";  # Yellow to red gradient
+        "col.inactive_border" = "rgba(3c3836aa)";  # Dark gray
         layout = "dwindle";
       };
 

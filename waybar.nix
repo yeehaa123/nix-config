@@ -145,40 +145,40 @@
       }
 
       window#waybar {
-          background: rgba(21, 18, 27, 0.7);
-          color: #cdd6f4;
+          background: #000000;  /* Pure black */
+          color: #ebdbb2;  /* Warm cream */
       }
 
       tooltip {
-          border-radius: 10px;
-          border-width: 1.5px;
+          background: #000000;
+          border-width: 1px;
           border-style: solid;
-          border-color: #11111b;
+          border-color: #3c3836;
           transition: 0.3s;
       }
 
       #workspaces button {
           padding: 5px;
-          color: #313244;
+          color: #928374;  /* Gray */
           margin-right: 5px;
       }
 
       #workspaces button.active {
-          color: #a6adc8;
+          color: #fabd2f;  /* Yellow */
       }
 
       #workspaces button.focused {
-          color: #a6adc8;
-          background: #eba0ac;
+          color: #000000;
+          background: #fabd2f;  /* Yellow */
       }
 
       #workspaces button.urgent {
-          color: #11111b;
-          background: #a6e3a1;
+          color: #000000;
+          background: #fb4934;  /* Red */
       }
 
       #workspaces button:hover {
-          color: #cdd6f4;
+          color: #ebdbb2;
       }
 
       #custom-power_profile,

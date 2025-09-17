@@ -78,6 +78,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupFileExtension = "backup";
                 extraSpecialArgs = { inherit inputs; };
                 users.yeehaa.imports = [
                   ./home.nix

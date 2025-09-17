@@ -12,9 +12,9 @@
 
         notification-margin = 3;
 
-        # Match tofi's subtle terminal theme
-        background = "1e1e2eff";
-        border-color = "585b70ff";
+        # Gruvbox Dark Hard theme
+        background = "000000ff";  # Pure black
+        border-color = "3c3836ff";  # Dark gray
         border-size = 1;
         padding-vertical = 6;
         padding-horizontal = 8;
@@ -22,37 +22,37 @@
 
         default-timeout = 5;
 
-        # Monospace fonts like tofi
+        # Monospace fonts
         title-font = "monospace:size=12";
         summary-font = "monospace:size=11";
         body-font = "monospace:size=11";
 
-        # Text colors matching tofi
-        title-color = "cdd6f4ff";
-        summary-color = "cdd6f4ff";
-        body-color = "cdd6f4ff";
+        # Gruvbox text colors
+        title-color = "fabd2fff";  # Yellow for titles
+        summary-color = "ebdbb2ff";  # Cream for summary
+        body-color = "ebdbb2ff";  # Cream for body
 
         # Simple progress bar
         progress-bar-height = 2;
-        progress-bar-color = "585b70ff";
+        progress-bar-color = "b8bb26ff";  # Green
       };
 
       low = {
-        background = "1e1e2eff";
-        border-color = "585b70ff";
-        summary-color = "585b70ff";
+        background = "000000ff";
+        border-color = "3c3836ff";
+        summary-color = "928374ff";  # Gray for low priority
       };
 
       normal = {
-        background = "1e1e2eff";
-        border-color = "585b70ff";
+        background = "000000ff";
+        border-color = "3c3836ff";
       };
 
       critical = {
-        background = "1e1e2eff";
-        border-color = "f38ba8ff";
+        background = "000000ff";
+        border-color = "fb4934ff";  # Red border
         border-size = 2;
-        title-color = "f38ba8ff";
+        title-color = "fb4934ff";  # Red title
       };
     };
   };
