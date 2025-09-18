@@ -118,6 +118,9 @@
       # Kitty modifier key (default is ctrl+shift)
       kitty_mod ctrl+shift
 
+      # On Wayland, let window manager handle Super key
+      linux_display_server wayland
+
       # Advanced scrollback search using fzf
       map kitty_mod+f launch --type=overlay sh -c 'cat /tmp/kitty_scrollback_* | fzf --no-sort --no-mouse --exact -i'
 

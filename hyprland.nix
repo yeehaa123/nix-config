@@ -30,6 +30,9 @@
         kb_options = "ctrl:nocaps";
         follow_mouse = 1;
 
+        # Force Hyprland to always intercept Super key combinations
+        force_no_accel = false;
+
         touchpad = {
           natural_scroll = false;
         };
@@ -87,20 +90,33 @@
 
       windowrulev2 = [
         "workspace 1, class:^(alacritty)$"
+        # Allow Hyprland keybindings to work in terminals
+        "noinitialfocus, class:^(kitty)$"
       ];
 
       "$mainMod" = "SUPER";
 
+      # Ensure these bindings work even when other windows have focus
+      binds = {
+        pass_mouse_when_bound = false;
+        scroll_event_delay = 0;
+        allow_workspace_cycles = true;
+      };
+
       bind = [
-        "$mainMod, T, exec, kitty"
+        "$mainMod, Return, exec, kitty"  # Changed from T to Return (more standard)
         "$mainMod, B, exec, google-chrome-stable"
         "$mainMod, O, exec, obsidian"
         "$mainMod, Q, killactive,"
-        "$mainMod, M, exit,"
+        "$mainMod SHIFT, E, exit,"  # Changed from M to Shift+E
         "$mainMod, E, exec, kitty -e lf"
         "$mainMod, V, togglefloating,"
+        "$mainMod, F, fullscreen,"  # Added fullscreen toggle
         "$mainMod, A, exec, kitty -e pulsemixer"
         "$mainMod, C, exec, cliphist list | tofi --prompt-text 'Clipboard: ' | cliphist decode | wl-copy"  # Clipboard history
+
+        # Keybindings reference (Super + /)
+        "$mainMod, slash, exec, kitty -e ~/configFiles/scripts/keybinds.sh"
 
         # TUI shortcuts
         "$mainMod, S, exec, kitty -e btop"          # System monitor
@@ -108,16 +124,28 @@
         "$mainMod, D, exec, kitty -e lazydocker"    # Docker TUI
         "$mainMod, N, exec, kitty -e nmtui"         # Network manager
         "$mainMod SHIFT, B, exec, kitty -e bluetuith"  # Bluetooth TUI
-        "$mainMod, R, exec, tofi-drun --drun-launch=true"
-        "$mainMod SHIFT, R, exec, tofi-drun --config ~/.config/tofi/fullscreen.conf --drun-launch=true"
+        "$mainMod, Space, exec, tofi-drun --drun-launch=true"  # Changed from R to Space
+        "$mainMod SHIFT, Space, exec, tofi-drun --config ~/.config/tofi/fullscreen.conf --drun-launch=true"  # Changed
         "$mainMod, P, pseudo,"
-        "$mainMod, J, togglesplit,"
+        "$mainMod, T, togglesplit,"  # Changed from J to T
 
-        # Move focus with mainMod + arrow keys
+        # Move focus with vim keys
+        "$mainMod, H, movefocus, l"
+        "$mainMod, L, movefocus, r"
+        "$mainMod, K, movefocus, u"
+        "$mainMod, J, movefocus, d"
+
+        # Move focus with arrow keys
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
+
+        # Move window with vim keys
+        "$mainMod SHIFT, H, movewindow, l"
+        "$mainMod SHIFT, L, movewindow, r"
+        "$mainMod SHIFT, K, movewindow, u"
+        "$mainMod SHIFT, J, movewindow, d"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
@@ -151,6 +179,16 @@
       binde = [
         ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+
+        # Resize windows with keyboard (hold keys)
+        "$mainMod CTRL, H, resizeactive, -50 0"
+        "$mainMod CTRL, L, resizeactive, 50 0"
+        "$mainMod CTRL, K, resizeactive, 0 -50"
+        "$mainMod CTRL, J, resizeactive, 0 50"
+        "$mainMod CTRL, left, resizeactive, -50 0"
+        "$mainMod CTRL, right, resizeactive, 50 0"
+        "$mainMod CTRL, up, resizeactive, 0 -50"
+        "$mainMod CTRL, down, resizeactive, 0 50"
       ];
 
       bindm = [

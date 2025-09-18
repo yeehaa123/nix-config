@@ -9,6 +9,7 @@
     ./fnott.nix
     ./atuin.nix
     ./kitty.nix
+    ./lf.nix
   ];
 
   home.username = "yeehaa";
@@ -95,6 +96,21 @@
     gopass-jsonapi
     lazygit       # Git TUI
     lazydocker    # Docker TUI
+
+    # File preview tools for lf
+    file          # File type detection
+    mediainfo     # Media file info
+    ffmpegthumbnailer  # Video thumbnails
+    poppler_utils # PDF previews (pdftotext)
+    epub2txt2     # EPUB preview
+    fontpreview   # Font previews
+    chafa         # Terminal image viewer
+    exiftool      # Image metadata
+    glow          # Markdown preview
+    jq            # JSON preview
+    atool         # Archive preview
+    unzip         # ZIP listing
+    odt2txt       # Office documents
 
     # Shell enhancements
     zoxide        # Smart directory jumping (z command)
@@ -216,6 +232,19 @@
         rebuild = "~/configFiles/rebuild.sh";
         update = "nix flake update ~/configFiles";
 
+        # Maintenance commands
+        sys-clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
+        sys-generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+        sys-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
+        sys-health = "sudo systemctl start system-health-check.service && journalctl -u system-health-check -n 20";
+        sys-backup = "systemctl --user start backup-config.service";
+        sys-dashboard = "~/configFiles/scripts/sys-dashboard.sh";
+
+        # Quick status commands
+        sys-failed = "systemctl --failed";
+        sys-timers = "systemctl list-timers --all";
+        sys-boot-time = "systemd-analyze boot";
+
         # Modern replacements
         ls = "eza --icons --group-directories-first";
         ll = "eza --icons --group-directories-first -la";
@@ -232,6 +261,8 @@
         e = "exit";
         g = "lazygit";
         f = "lf";
+        keybinds = "~/configFiles/scripts/keybinds.sh";
+        kb = "~/configFiles/scripts/keybinds.sh";
 
         # Git shortcuts
         gs = "git status";
