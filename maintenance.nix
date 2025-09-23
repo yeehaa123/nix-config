@@ -10,9 +10,10 @@
   };
 
   # Optimize nix store (deduplication)
+  # DISABLED: Can cause system freezes during operation
+  # Run manually with: sudo nix-store --optimise
   nix.optimise = {
-    automatic = true;
-    dates = [ "weekly" ];
+    automatic = false;  # Explicitly disabled to prevent freezes
   };
 
   # Auto-upgrade system (optional - uncomment if you want)

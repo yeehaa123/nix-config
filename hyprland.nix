@@ -30,9 +30,6 @@
         kb_options = "ctrl:nocaps";
         follow_mouse = 1;
 
-        # Force Hyprland to always intercept Super key combinations
-        force_no_accel = false;
-
         touchpad = {
           natural_scroll = false;
         };
@@ -90,18 +87,9 @@
 
       windowrulev2 = [
         "workspace 1, class:^(alacritty)$"
-        # Allow Hyprland keybindings to work in terminals
-        "noinitialfocus, class:^(kitty)$"
       ];
 
       "$mainMod" = "SUPER";
-
-      # Ensure these bindings work even when other windows have focus
-      binds = {
-        pass_mouse_when_bound = false;
-        scroll_event_delay = 0;
-        allow_workspace_cycles = true;
-      };
 
       bind = [
         "$mainMod, Return, exec, kitty"  # Changed from T to Return (more standard)
