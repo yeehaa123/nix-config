@@ -85,6 +85,13 @@ i18n = {
   };
 
 
+  # Don't suspend on lid close (for external monitor usage)
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
+
   services = {
     expressvpn.enable = true;
     pipewire = {
