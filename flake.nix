@@ -87,6 +87,18 @@
             }
           ];
         };
+
+        # ISO installer configuration
+        installer = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./iso.nix
+            {
+              nixpkgs.pkgs = pkgs;
+            }
+          ];
+        };
       };
     };
 }
