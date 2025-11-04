@@ -62,17 +62,17 @@ curl -L https://raw.githubusercontent.com/yeehaa123/nix-config/main/install.sh |
 └── maintenance.nix            # System maintenance tasks
 ```
 
-**Note:** `hardware-configuration.nix` is machine-specific and NOT stored in git. Each system generates its own in `/etc/nixos/` via `nixos-generate-config`.
+**Note:** `hardware-configuration.nix` is machine-specific and kept in `/etc/nixos/`. Each system generates its own local copy via `nixos-generate-config`.
 
 ## 🔧 Quick Commands
 
 ```bash
 # Rebuild system
-sudo nixos-rebuild switch --flake .#nixos
+sudo nixos-rebuild switch --impure --flake .#nixos
 
 # Update everything
 nix flake update
-sudo nixos-rebuild switch --flake .#nixos
+sudo nixos-rebuild switch --impure --flake .#nixos
 
 # Rollback to previous generation
 sudo nixos-rebuild switch --rollback

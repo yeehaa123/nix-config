@@ -2,8 +2,6 @@
 
 { imports =
   [
-    # Hardware config is machine-specific, kept in /etc/nixos/
-    /etc/nixos/hardware-configuration.nix
     ./maintenance.nix
   ];
 
