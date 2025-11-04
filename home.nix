@@ -150,6 +150,7 @@
     android-file-transfer
     obsidian
     expressvpn
+    tidal-hifi
     stdenv.cc.cc.lib
   ];
 

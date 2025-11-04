@@ -100,18 +100,24 @@ i18n = {
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    # X server (needed for XWayland support even on pure Wayland)
     xserver = {
       enable = true;
-      xkb.layout = "us";
-      xkb.variant = "";
-      xkb.options = "ctrl:nocaps";
+      xkb = {
+        layout = "us";
+        options = "ctrl:nocaps";  # Caps Lock becomes Ctrl
+      };
     };
 
-    displayManager = {
-      sddm.enable = true;
-      sddm.autoNumlock = true;
-      autoLogin.enable = false;
-      autoLogin.user = "yeehaa";
+    # Greetd with tuigreet - lightweight Wayland-native display manager
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+          user = "greeter";
+        };
+      };
     };
 
     printing.enable = true;
@@ -128,7 +134,7 @@ i18n = {
 
   security = {
     rtkit.enable = true;
-    pam.services.sddm.enableGnomeKeyring= true;
+    pam.services.greetd.enableGnomeKeyring = true;
   };
 
 

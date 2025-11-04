@@ -2,46 +2,27 @@
 
 Personal NixOS/Hyprland configuration with Gruvbox Dark Hard theme.
 
-## 🚀 Installation Guides
+## 🚀 Installation
 
-Choose the guide that matches your target system:
+**→ [INSTALL.md](INSTALL.md) - Complete Installation Guide**
 
-### 📱 Installing on Bazzite (ROG Flow Z13 / Gaming Devices)
+This guide covers:
+- Downloading official NixOS ISO
+- Creating bootable USB
+- Running automated installation script
+- Deploying this complete configuration
 
-**→ [BAZZITE-HYPRLAND-SETUP.md](BAZZITE-HYPRLAND-SETUP.md) ← START HERE**
-
-Use this for:
-- ASUS ROG Flow Z13 (2025)
-- Any gaming handheld/laptop where you want Bazzite's gaming stack
-- Systems where you want Hyprland + KDE dual-boot
-- When you need better hardware support for newest devices
-
-This guide sets up:
-- Bazzite as base OS (gaming optimizations)
-- Hyprland for productivity (via rpm-ostree)
-- KDE Plasma for gaming (switch at login)
-- Nix + home-manager for packages/dotfiles
-
-### 💻 Installing on Pure NixOS
-
-**→ [INSTALL.md](INSTALL.md)**
-
-Use this for:
-- Desktop PCs
-- Servers
-- Laptops with good NixOS hardware support
-- When you want pure NixOS experience
-
-This guide:
-- Boots from official NixOS ISO
-- Runs automated install script
-- Deploys this full configuration
+Quick install on official NixOS ISO:
+```bash
+curl -L https://raw.githubusercontent.com/yeehaa123/nix-config/main/install.sh | sudo bash
+```
 
 ---
 
 ## 📦 What's Included
 
 - **Window Manager:** Hyprland (tiling Wayland compositor)
+- **Display Manager:** greetd + tuigreet (lightweight Wayland-native)
 - **Status Bar:** Waybar
 - **Terminal:** Kitty
 - **Editor:** Neovim (with LSP, plugins, gen.nvim)
@@ -49,6 +30,7 @@ This guide:
 - **Notifications:** Fnott
 - **File Manager:** lf
 - **Shell History:** Atuin
+- **Music:** Tidal HiFi
 - **Theme:** Gruvbox Dark Hard (consistent across all apps)
 
 ## 🎨 Features
@@ -57,14 +39,14 @@ This guide:
 - Home-manager for user environment
 - Consistent theming across terminal, editor, and UI
 - Optimized for development workflow
-- Gaming-ready (on Bazzite setup)
+- Latest kernel for hardware support
+- Automated system maintenance tasks
 
 ## 📝 Configuration Structure
 
 ```
 .
-├── BAZZITE-HYPRLAND-SETUP.md  # Guide for Bazzite + Hyprland + Nix
-├── INSTALL.md                  # Guide for pure NixOS
+├── INSTALL.md                  # Installation guide
 ├── install.sh                  # Automated NixOS installer
 ├── flake.nix                   # Main flake configuration
 ├── configuration.nix           # NixOS system config
@@ -83,19 +65,6 @@ This guide:
 
 ## 🔧 Quick Commands
 
-### On Bazzite (after setup):
-```bash
-# Update home-manager config
-home-manager switch --flake ~/.config/home-manager#yeehaa
-
-# Update system
-rpm-ostree upgrade && reboot
-
-# Rollback if something breaks
-rpm-ostree rollback && reboot
-```
-
-### On NixOS:
 ```bash
 # Rebuild system
 sudo nixos-rebuild switch --flake .#nixos
@@ -104,18 +73,46 @@ sudo nixos-rebuild switch --flake .#nixos
 nix flake update
 sudo nixos-rebuild switch --flake .#nixos
 
-# Rollback
+# Rollback to previous generation
 sudo nixos-rebuild switch --rollback
+
+# List generations
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+
+# Clean old generations
+sudo nix-collect-garbage -d
 ```
 
-## 🎯 Repository Purpose
+## 🛠️ Key Bindings
 
-This repository serves two purposes:
+Run the interactive keybindings reference:
+```bash
+keybinds
+# or
+kb
+```
 
-1. **Personal Configuration:** My daily-driver setup that I maintain and evolve
-2. **Installation Automation:** Easy deployment to new machines using either:
-   - Pure NixOS (for traditional installations)
-   - Bazzite + Nix hybrid (for gaming-focused devices)
+## 🎯 Development Tools
+
+Included in this configuration:
+- **Languages:** Node.js, Rust, OCaml, Go
+- **LSPs:** typescript-language-server, svelte-language-server, rust-analyzer
+- **Formatters:** prettier, stylua, rustfmt
+- **Build Tools:** pnpm, cargo, dune, make, gcc
+- **Databases:** Turso CLI, sqld
+- **DevOps:** Terraform, Docker, lazydocker
+- **Version Control:** Git, lazygit, gh (GitHub CLI)
+
+## 🎵 Multimedia
+
+- **Music:** Tidal HiFi (high-fidelity streaming), cmus (terminal player)
+- **Audio:** PipeWire with ALSA and PulseAudio support
+
+## 📂 File Management
+
+- **TUI:** lf (fast file manager with preview support)
+- **Preview Tools:** bat, chafa, glow, mediainfo, exiftool
+- **Archive Support:** atool, unzip
 
 ## 🤝 Contributing
 
@@ -131,7 +128,3 @@ Personal configuration - use at your own risk and adapt to your needs.
 ---
 
 **Last Updated:** 2025-01-06
-
-**Primary Machines:**
-- Desktop: Pure NixOS
-- ROG Flow Z13 (2025): Bazzite + Hyprland + Nix
