@@ -76,6 +76,55 @@ reboot
 
 Remove the USB drive and boot into your new NixOS system!
 
+---
+
+## Migrating to an Existing NixOS System
+
+If you already have NixOS installed and want to adopt this configuration:
+
+### Simple Method (Recommended)
+
+```bash
+# 1. Generate hardware config for your machine
+sudo nixos-generate-config
+
+# 2. Apply configuration from GitHub
+sudo nixos-rebuild switch --flake github:yeehaa123/nix-config#nixos
+```
+
+That's it! The configuration will:
+- Use your existing hardware-configuration.nix from `/etc/nixos/`
+- Download and apply all packages and settings from GitHub
+- Keep your hardware-specific settings intact
+
+### Clone for Local Editing
+
+If you want to make local modifications:
+
+```bash
+# 1. Generate hardware config
+sudo nixos-generate-config
+
+# 2. Clone the configuration
+git clone https://github.com/yeehaa123/nix-config.git ~/configFiles
+cd ~/configFiles
+
+# 3. Make any desired changes
+# Edit files as needed...
+
+# 4. Apply from local copy
+sudo nixos-rebuild switch --flake .#nixos
+```
+
+### Important Notes
+
+- **Hardware config is NOT in git** - Each machine keeps its own in `/etc/nixos/hardware-configuration.nix`
+- **First rebuild may take time** - NixOS will download and build packages (15-30 minutes)
+- **You can rollback** - If something breaks, select previous generation at boot
+- **Update your config** - To get latest changes: `cd ~/configFiles && git pull && sudo nixos-rebuild switch --flake .#nixos`
+
+---
+
 ## Manual Installation
 
 If you prefer more control:

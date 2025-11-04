@@ -1,0 +1,12 @@
+# Hardware-specific configuration
+# Each machine should generate its own in /etc/nixos/
+hardware-configuration.nix
+
+# Build results
+result
+result-*
+
+# Temporary files
+*.swp
+*.swo
+*~

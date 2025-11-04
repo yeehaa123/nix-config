@@ -2,7 +2,8 @@
 
 { imports =
   [
-    ./hardware-configuration.nix
+    # Hardware config is machine-specific, kept in /etc/nixos/
+    /etc/nixos/hardware-configuration.nix
     ./maintenance.nix
   ];
 
@@ -109,14 +110,13 @@ i18n = {
       };
     };
 
-    # Greetd with tuigreet - lightweight Wayland-native display manager
-    greetd = {
+    # ly - TUI display manager with a nice aesthetic
+    displayManager.ly = {
       enable = true;
       settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
-          user = "greeter";
-        };
+        animation = "matrix";
+        hide_borders = false;
+        save_file = "/var/lib/ly/save";
       };
     };
 
@@ -134,7 +134,7 @@ i18n = {
 
   security = {
     rtkit.enable = true;
-    pam.services.greetd.enableGnomeKeyring = true;
+    pam.services.ly.enableGnomeKeyring = true;
   };
 
 

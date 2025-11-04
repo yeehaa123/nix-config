@@ -51,7 +51,6 @@ curl -L https://raw.githubusercontent.com/yeehaa123/nix-config/main/install.sh |
 ├── flake.nix                   # Main flake configuration
 ├── configuration.nix           # NixOS system config
 ├── home.nix                    # Home-manager config
-├── hardware-configuration.nix  # Hardware-specific settings
 ├── hyprland.nix               # Hyprland window manager
 ├── waybar.nix                 # Status bar
 ├── neovim.nix                 # Neovim configuration
@@ -62,6 +61,8 @@ curl -L https://raw.githubusercontent.com/yeehaa123/nix-config/main/install.sh |
 ├── atuin.nix                  # Shell history
 └── maintenance.nix            # System maintenance tasks
 ```
+
+**Note:** `hardware-configuration.nix` is machine-specific and NOT stored in git. Each system generates its own in `/etc/nixos/` via `nixos-generate-config`.
 
 ## 🔧 Quick Commands
 
