@@ -6,10 +6,7 @@
     xwayland.enable = true;
     systemd.enable = true;
     settings = {
-      monitor = [
-        "eDP-1,highres,auto,1.5"    # Primary screen at 1.5x
-        ",highres,auto,1.333333"          # Secondary screen(s) at 1.6x
-      ];
+      # Monitor configuration is defined in host-specific files (hosts/zenbook.nix, hosts/z13.nix)
 
       env = [
         "XCURSOR_SIZE,72"
@@ -113,7 +110,7 @@
 
         # Monitor management (laptop + external display)
         "$mainMod, M, exec, hyprctl keyword monitor \"eDP-1,disable\""  # Disable laptop screen (closed lid mode)
-        "$mainMod SHIFT, M, exec, hyprctl keyword monitor \"eDP-1,highres,auto,1.5\""  # Re-enable laptop screen
+        # Super+Shift+M is defined in host-specific configs with appropriate scaling
 
         # TUI shortcuts
         "$mainMod, S, exec, kitty -e btop"          # System monitor

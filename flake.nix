@@ -73,6 +73,7 @@
           modules = [
             /etc/nixos/hardware-configuration.nix
             ./configuration.nix
+            ./hosts/zenbook.nix  # Zenbook-specific overrides (display scaling)
             home-manager.nixosModules.home-manager
             {
               nixpkgs.pkgs = pkgs;
