@@ -34,10 +34,6 @@
         plenary-nvim
         nvim-web-devicons
         gen-nvim
-        {
-          plugin = obsidian-nvim;
-          config = toLuaFile ./nvim/plugin/obsidian.lua;
-        }
         neodev-nvim
         limelight-vim
         {
