@@ -88,6 +88,29 @@
             }
           ];
         };
+
+        z13 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            /etc/nixos/hardware-configuration.nix
+            ./configuration.nix
+            ./hosts/z13.nix  # Z13-specific overrides (display scaling)
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.pkgs = pkgs;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                extraSpecialArgs = { inherit inputs; };
+                users.yeehaa.imports = [
+                  ./home.nix
+                ];
+              };
+            }
+          ];
+        };
       };
     };
 }
