@@ -11,7 +11,9 @@
         ",highres,auto,1.333333"          # Secondary screen(s) at 1.6x
       ];
 
-      env = "XCURSOR_SIZE,72";
+      env = [
+        "XCURSOR_SIZE,72"
+      ];
 
       exec-once = [
         "hyprpaper"
