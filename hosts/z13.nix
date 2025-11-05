@@ -11,8 +11,6 @@
         ",highres,auto,1.333333"          # Secondary screen(s) at 1.333x
       ];
 
-      env = "XCURSOR_SIZE,48";  # Adjusted cursor size for 1.333x scaling
-
       # Override monitor re-enable binding to use correct scaling
       bind = [
         "$mainMod SHIFT, M, exec, hyprctl keyword monitor \"eDP-1,highres,auto,1.333333\""
