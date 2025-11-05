@@ -84,11 +84,32 @@ i18n = {
   };
 
 
-  # Don't suspend on lid close (for external monitor usage)
+  # Power management: Sleep on lid close unless external monitor is connected
   services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
+    lidSwitch = "suspend";              # Sleep when lid closed (no external monitor)
+    lidSwitchDocked = "ignore";         # Don't sleep when docked/external monitor connected
+    lidSwitchExternalPower = "suspend"; # Sleep even on AC power if no external monitor
+  };
+
+  # Battery optimization
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "powersave";  # Use powersave governor for better battery life
+  };
+
+  # Auto CPU frequency scaling for laptops
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
   };
 
   services = {
