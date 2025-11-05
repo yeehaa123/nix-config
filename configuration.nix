@@ -20,7 +20,7 @@
 
 
 networking = {
-  hostName = "nixos"; # Define your hostname.
+  hostName = "z13"; # Define your hostname.
   networkmanager.enable = true;
   nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networkmanager.dns = "none";
