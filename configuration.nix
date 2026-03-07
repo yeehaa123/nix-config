@@ -113,6 +113,7 @@ i18n = {
   };
 
   services = {
+    openssh.enable = true;
     expressvpn.enable = true;
     pipewire = {
       enable = true;
@@ -162,6 +163,9 @@ i18n = {
     isNormalUser = true;
     description = "Jan Hein Hoogstad";
     extraGroups = [ "networkmanager" "wheel" "audio" "docker"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBfks01nVAsEpKFS7dkLJKWEVjPzHSZ6AtMhz66Tg/FU yeehaa@offcourse.io"
+    ];
   };
 
 
