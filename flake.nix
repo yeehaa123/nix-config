@@ -61,19 +61,20 @@
           overlay-waybar
           (final: prev: {
             bun = final.unstable.bun;
+            claude-code = final.unstable.claude-code;
           })
         ];
       };
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        zenbook = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
             /etc/nixos/hardware-configuration.nix
             ./configuration.nix
-            ./hosts/zenbook.nix  # Zenbook-specific overrides (display scaling)
+            ./hosts/zenbook.nix  # Zenbook-specific overrides
             home-manager.nixosModules.home-manager
             {
               nixpkgs.pkgs = pkgs;

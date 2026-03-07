@@ -2,7 +2,7 @@
 
 {
   # Z13-specific overrides
-  # This file only contains settings that differ from the main configuration
+  networking.hostName = "z13";
 
   home-manager.users.yeehaa = {
     wayland.windowManager.hyprland.settings = {

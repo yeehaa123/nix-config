@@ -20,7 +20,7 @@
 
 
 networking = {
-  hostName = "z13"; # Define your hostname.
+  # hostName is set in host-specific files (hosts/z13.nix, hosts/zenbook.nix)
   networkmanager.enable = true;
   nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networkmanager.dns = "none";

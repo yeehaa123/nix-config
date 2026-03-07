@@ -128,6 +128,7 @@
     nerd-fonts.meslo-lg
 
     # User applications
+    claude-code
     pkgs.fontconfig
     pandoc
     gh

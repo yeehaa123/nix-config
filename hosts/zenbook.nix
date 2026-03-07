@@ -2,7 +2,14 @@
 
 {
   # Zenbook-specific overrides
-  # This file only contains settings that differ from the main configuration
+  networking.hostName = "zenbook";
+
+  # Zenbook stays awake on lid close (external monitor usage)
+  services.logind = {
+    lidSwitch = lib.mkForce "ignore";
+    lidSwitchDocked = lib.mkForce "ignore";
+    lidSwitchExternalPower = lib.mkForce "ignore";
+  };
 
   home-manager.users.yeehaa = {
     wayland.windowManager.hyprland.settings = {
