@@ -72,7 +72,7 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            /etc/nixos/hardware-configuration.nix
+            ./hosts/zenbook-hardware.nix
             ./configuration.nix
             ./hosts/zenbook.nix  # Zenbook-specific overrides
             home-manager.nixosModules.home-manager
@@ -95,7 +95,7 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            /etc/nixos/hardware-configuration.nix
+            ./hosts/z13-hardware.nix
             ./configuration.nix
             ./hosts/z13.nix  # Z13-specific overrides (display scaling)
             home-manager.nixosModules.home-manager

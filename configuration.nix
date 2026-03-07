@@ -66,10 +66,10 @@ i18n = {
 
   # Configure keymap in X11
   environment = {
+    variables.EDITOR = "nvim";
     systemPackages = with pkgs; [
       # Core system tools only
       gnome-keyring
-      vim
       git
       wget
       networkmanagerapplet
