@@ -17,7 +17,6 @@
 
   home.sessionPath = [
     "$HOME/.cargo/bin"
-    "$HOME/.npm-global/bin"
   ];
 
   xresources.properties = {
@@ -216,10 +215,6 @@
 
       bashrcExtra = ''
         export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-
-        # npm global prefix (writable location for NixOS)
-        export NPM_CONFIG_PREFIX="$HOME/.npm-global"
-        export PI_PACKAGE_DIR="$HOME/.npm-global"
 
         # Initialize zoxide for smart cd
         eval "$(zoxide init bash)"
