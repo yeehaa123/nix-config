@@ -113,7 +113,13 @@ i18n = {
   };
 
   services = {
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };
+    };
     expressvpn.enable = true;
     pipewire = {
       enable = true;

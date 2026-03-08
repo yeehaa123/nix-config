@@ -98,7 +98,7 @@
         "$mainMod, B, exec, google-chrome-stable"
         "$mainMod, O, exec, obsidian"
         "$mainMod, Q, killactive,"
-        "$mainMod SHIFT, E, exit,"  # Changed from M to Shift+E
+        "$mainMod SHIFT, E, exec, ~/configFiles/scripts/power-menu.sh"  # Power menu
         "$mainMod, E, exec, kitty -e lf"
         "$mainMod, V, togglefloating,"
         "$mainMod, F, fullscreen,"  # Added fullscreen toggle

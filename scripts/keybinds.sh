@@ -75,7 +75,7 @@ echo "  Super + Shift + B        → Bluetooth manager"
 echo
 
 echo -e "${YELLOW}▶ System${NC}"
-echo "  Super + Shift + E        → Exit Hyprland"
+echo "  Super + Shift + E        → Power menu (lock/sleep/reboot/shutdown/exit)"
 echo "  Super + /                → Show this cheat sheet"
 echo
 
