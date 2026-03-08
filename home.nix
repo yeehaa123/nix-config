@@ -36,6 +36,11 @@
     newSession = true;
     escapeTime = 0;
     secureSocket = false;
+    extraConfig = ''
+      set -s extended-keys on
+      set -s extended-keys-format csi-u
+      set -as terminal-features 'xterm*:extkeys'
+    '';
   };
 
     fonts.fontconfig.enable = true;
@@ -214,7 +219,10 @@
       enableCompletion = true;
 
       bashrcExtra = ''
-        export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+        export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.npm-global/bin"
+
+        # npm global prefix (writable location for NixOS)
+        export NPM_CONFIG_PREFIX="$HOME/.npm-global"
 
         # Initialize zoxide for smart cd
         eval "$(zoxide init bash)"

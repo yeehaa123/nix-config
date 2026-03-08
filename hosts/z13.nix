@@ -8,10 +8,6 @@
   boot.kernelParams = [ "usbcore.initial_descriptor_timeout=200" ];
 
   services.udev.extraRules = ''
-    # Disable phantom USB port 3-3 to prevent future enumeration attempts
-    ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_port", KERNELS=="usb3", ATTR{port_number}=="2", \
-      ATTR{disable}="1"
-
     # Rebind keyboard cover touchpad from hid_asus to hid-multitouch for proper scrolling
     ACTION=="add", SUBSYSTEM=="hid", ATTRS{idVendor}=="0b05", ATTRS{idProduct}=="1a30", \
       DRIVERS=="asus", \
