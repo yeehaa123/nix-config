@@ -150,6 +150,8 @@
     kitty
     openssl
     xclip
+    appimage-run
+    paper-desktop
     brave
     thunderbird
     google-chrome
@@ -273,6 +275,7 @@
         f = "lf";
         keybinds = "~/configFiles/scripts/keybinds.sh";
         kb = "~/configFiles/scripts/keybinds.sh";
+        paper = "paper-desktop";
 
         # Git shortcuts
         gs = "git status";

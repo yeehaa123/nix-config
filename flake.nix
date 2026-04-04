@@ -62,6 +62,7 @@
           (final: prev: {
             bun = final.unstable.bun;
             claude-code = final.unstable.claude-code;
+            paper-desktop = final.callPackage ./paper.nix {};
           })
         ];
       };
