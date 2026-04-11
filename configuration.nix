@@ -49,6 +49,18 @@ i18n = {
     xwayland.enable = true;
   };
 
+  # nix-ld: provide a dynamic linker at FHS paths so prebuilt binaries
+  # (e.g. sharp's native module, electron, playwright) can dlopen system
+  # libraries without nix-patching. Sets NIX_LD and NIX_LD_LIBRARY_PATH
+  # for all shells.
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib  # libstdc++
+      zlib
+    ];
+  };
+
   # XDG portal configuration for Wayland
   xdg.portal = {
     enable = true;

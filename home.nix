@@ -1,5 +1,23 @@
 { config, pkgs, ... }:
 
+let
+  # Wrap bun so prebuilt native modules (sharp, etc.) can dlopen
+  # libstdc++ and friends. Nix-installed bun uses the nix glibc
+  # linker, which ignores NIX_LD_LIBRARY_PATH, so nix-ld alone is
+  # not enough. The wrapper injects LD_LIBRARY_PATH for bun only.
+  bun-wrapped = pkgs.symlinkJoin {
+    name = "bun-wrapped";
+    paths = [ pkgs.bun ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/bun \
+        --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath [
+          pkgs.stdenv.cc.cc.lib
+          pkgs.zlib
+        ]}"
+    '';
+  };
+in
 {
   imports = [
     ./neovim.nix
@@ -99,6 +117,7 @@
     cmus          # Music player
     gopass        # Password manager
     gopass-jsonapi
+    _1password-cli
     lazygit       # Git TUI
     lazydocker    # Docker TUI
 
@@ -137,6 +156,7 @@
     pkgs.fontconfig
     pandoc
     gh
+    gitleaks
     zip
     ripgrep
     unzip
@@ -146,12 +166,13 @@
     tree
     nix-output-monitor
     nil
-    bun
+    bun-wrapped
     kitty
     openssl
     xclip
     appimage-run
     paper-desktop
+    pencil-desktop
     brave
     thunderbird
     google-chrome
@@ -276,6 +297,7 @@
         keybinds = "~/configFiles/scripts/keybinds.sh";
         kb = "~/configFiles/scripts/keybinds.sh";
         paper = "paper-desktop";
+        pencil = "pencil-desktop";
 
         # Git shortcuts
         gs = "git status";
