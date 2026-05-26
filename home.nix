@@ -66,7 +66,7 @@ in
   home.packages = with pkgs; [
     # Development tools
     direnv
-    nodejs_20
+    nodejs_24
     nodePackages.node-gyp
     nodePackages.typescript-language-server
     nodePackages.svelte-language-server
