@@ -60,12 +60,24 @@
           overlay-unstable
           overlay-waybar
           (final: prev: {
-            bun = final.unstable.bun;
-            claude-code = final.unstable.claude-code-bin.overrideAttrs (old: {
-              version = "2.1.114";
+            # Bun 1.4 is not in nixpkgs yet — unstable is still on 1.3.13 —
+            # and the brains repo now requires >= 1.4.0 for `Bun.Image`.
+            # Overridden here rather than installed from bun.com so it keeps
+            # flowing through bun-wrapped, which injects LD_LIBRARY_PATH so
+            # prebuilt native modules can dlopen libstdc++. Drop this whole
+            # override once unstable ships 1.4.
+            bun = final.unstable.bun.overrideAttrs (old: {
+              version = "1.4.0";
               src = final.fetchurl {
-                url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.114/linux-x64/claude";
-                sha256 = "12bd4b0916deb06be17ffc7b2f0485e140bf00b2db3dcb78469d66723d73c27f";
+                url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-linux-x64.zip";
+                hash = "sha256-LQP7X7g6yLVnrKCigbLOGhoZ1Ij1bClo2Iw/Jekv5FI=";
+              };
+            });
+            claude-code = final.unstable.claude-code-bin.overrideAttrs (old: {
+              version = "2.1.258";
+              src = final.fetchurl {
+                url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.258/linux-x64/claude";
+                hash = "sha256-cE8TNKxl0+ieHGwddmMpOteGphZq/bcbUHUzffYw+XY=";
               };
             });
             paper-desktop = final.callPackage ./paper.nix {};

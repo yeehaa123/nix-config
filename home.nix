@@ -175,6 +175,7 @@ in
     pencil-desktop
     brave
     thunderbird
+    whatsapp-for-linux
     google-chrome
     android-file-transfer
     obsidian
