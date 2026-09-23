@@ -74,10 +74,10 @@
               };
             });
             claude-code = final.unstable.claude-code-bin.overrideAttrs (old: {
-              version = "2.1.258";
+              version = "2.1.280";
               src = final.fetchurl {
-                url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.258/linux-x64/claude";
-                hash = "sha256-cE8TNKxl0+ieHGwddmMpOteGphZq/bcbUHUzffYw+XY=";
+                url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.280/linux-x64/claude";
+                hash = "sha256-HghQPb3zwssNcG0y80CCdziNHHbvEIZz6P5CwbMikls=";
               };
             });
             paper-desktop = final.callPackage ./paper.nix {};
