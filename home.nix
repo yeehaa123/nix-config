@@ -172,7 +172,6 @@ in
     xclip
     appimage-run
     paper-desktop
-    pencil-desktop
     brave
     thunderbird
     whatsapp-for-linux
@@ -298,7 +297,6 @@ in
         keybinds = "~/configFiles/scripts/keybinds.sh";
         kb = "~/configFiles/scripts/keybinds.sh";
         paper = "paper-desktop";
-        pencil = "pencil-desktop";
 
         # Git shortcuts
         gs = "git status";

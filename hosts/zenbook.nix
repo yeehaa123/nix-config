@@ -4,6 +4,13 @@
   # Zenbook-specific overrides
   networking.hostName = "zenbook";
 
+  # No disk swap on this machine; compressed RAM swap keeps memory spikes
+  # (e.g. parallel tsc builds) from freezing the system before OOM kicks in
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
   # Zenbook stays awake on lid close (external monitor usage)
   services.logind = {
     lidSwitch = lib.mkForce "ignore";
