@@ -116,10 +116,14 @@ i18n = {
       battery = {
         governor = "powersave";
         turbo = "never";
+        platform_profile = "balanced";
       };
       charger = {
         governor = "performance";
-        turbo = "auto";
+        # "auto" only enables turbo after a few seconds of sustained load, so
+        # short-lived processes (git hooks, CLIs) ran at base clock (1.7GHz).
+        turbo = "always";
+        platform_profile = "performance";
       };
     };
   };

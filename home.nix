@@ -37,6 +37,12 @@ in
     "$HOME/.cargo/bin"
   ];
 
+  # Turborepo remote cache team (Vercel). The token comes from `turbo login`
+  # (~/.config/turborepo/config.json); CI uses the same team via repo secrets.
+  home.sessionVariables = {
+    TURBO_TEAM = "offcourses-projects";
+  };
+
   xresources.properties = {
     "Xcursor.size" = 24;
   };
